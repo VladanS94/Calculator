@@ -1,4 +1,5 @@
 import { useState } from "react"
+import * as math from 'mathjs';
 
 const App = () => {
   const [calc, setCalc] = useState('')
@@ -15,7 +16,11 @@ const App = () => {
     }
     setCalc(calc + value)
     if(!ops.includes(value)){
-      setResults(eval(calc + value).toString())
+      try {
+        setResults(math.evaluate(calc + value).toString());
+      } catch (error) {
+        setResults('Error');
+      }
     }
   }
 
@@ -30,7 +35,11 @@ const App = () => {
   }
 
   const calculate = () =>{
-    setCalc(eval(calc).toString())
+    try {
+      setCalc(math.evaluate(calc).toString());
+    } catch (error) {
+      setCalc('Error');
+    }
   }
 
   const deleteLast = () =>{
@@ -41,7 +50,7 @@ const App = () => {
     setCalc(value)
   }
 
-  
+
   return (
     <div className="app">
       <div className='calculator'>
