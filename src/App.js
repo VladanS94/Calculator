@@ -8,8 +8,8 @@ const App = () => {
 
   const updateCalc = (value) =>{
     if(
-      ops.includes(value) && calc === '' ||
-      ops.includes(value) && ops.includes(calc.slice(-1))
+      (ops.includes(value) && calc === '') ||
+      (ops.includes(value) && ops.includes(calc.slice(-1)))
     ){
       return;
     }
@@ -41,12 +41,13 @@ const App = () => {
     setCalc(value)
   }
 
+  
   return (
     <div className="app">
       <div className='calculator'>
         <div className='display-res'>
-          {results ? <span>({results})</span>: ''}&nbsp;
-          {calc || '0'}
+        {(results ? <span>({results})</span> : '')}&nbsp;
+{calc || '0'}
         </div>
         <div className='operators'>
           <button onClick={() => updateCalc('/')}>/</button>
